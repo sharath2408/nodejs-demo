@@ -25,7 +25,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push dockernaan2/nodeapp:$BUILD_NUMBER'
+                sh 'sudo docker push dockernaan2/nodeapp:$BUILD_NUMBER'
             }
         }
 }
