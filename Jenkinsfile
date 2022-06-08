@@ -2,7 +2,7 @@
 
 
 pipeline {
-    agent non 
+    agent none 
     environment {
     DOCKERHUB_CREDENTIALS = credentials('dockernaan2')
     }
