@@ -3,7 +3,7 @@
 
 pipeline {
     agent {
-                label "SAAS_Build_Skytap"
+                label "slave-node"
             } 
     environment {
     DOCKERHUB_CREDENTIALS = credentials('dockernaan2')
