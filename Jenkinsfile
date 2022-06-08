@@ -1,20 +1,17 @@
-
-
-
 pipeline {
-     agent {
-                	label "slave-node"
-     }
-     
+    agent slave-node
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockernaan2')
+    }
     stages { 
         stage('SCM Checkout') {
-           steps{
+            steps{
             git 'https://github.com/sharath2408/nodejs-demo.git'
             }
         }
 
         stage('Build docker image') {
-            steps {  
+            steps{  
                 sh 'sudo docker build -t dockernaan2/nodeapp:$BUILD_NUMBER .'
             }
         }
@@ -29,13 +26,13 @@ pipeline {
             }
         }
         stage('Deploy App') {
-      steps {
+      steps{
           kubernetesDeploy(configs: "deploy.yml", kubeconfigId: "KUBERNETES_CLUSTER_CONFIG")
       }
     }
 }
 post {
-        always {
+        always{
             sh 'docker logout'
         }
     }
