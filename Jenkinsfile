@@ -2,13 +2,12 @@
 
 
 pipeline {
-     agent none
+     agent {
+          slave-node
+     }
+     
     stages { 
         stage('SCM Checkout') {
-            agent {
-                label "slave-node"
-            } 
-            
            steps{
             git 'https://github.com/sharath2408/nodejs-demo.git'
             }
