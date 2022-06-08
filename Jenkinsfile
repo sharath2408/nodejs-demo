@@ -2,7 +2,7 @@
 
 
 pipeline {
-    agent slave-node 
+    agent {slave-node} 
     environment {
     DOCKERHUB_CREDENTIALS = credentials('dockernaan2')
     }
