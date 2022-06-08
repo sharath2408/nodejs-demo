@@ -2,16 +2,14 @@
 
 
 pipeline {
-    agent none 
+    agent slave-node 
     environment {
     DOCKERHUB_CREDENTIALS = credentials('dockernaan2')
     }
     stages { 
         stage('SCM Checkout') {
-            agent {
-                label "slave-node"
-            }
-            steps{
+            
+           steps{
             git 'https://github.com/sharath2408/nodejs-demo.git'
             }
         }
