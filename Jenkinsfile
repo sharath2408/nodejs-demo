@@ -3,7 +3,7 @@
 
 pipeline {
      agent {
-          slave-node
+                	label "slave-node"
      }
      
     stages { 
