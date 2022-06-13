@@ -25,11 +25,15 @@ pipeline {
                 sh 'sudo docker push dockernaan2/nodeapp:$BUILD_NUMBER'
             }
         }
-        stage('Deploy App') {
-      steps{
-          kubernetesDeploy(configs: "deploy.yml", kubeconfigId: "KUBERNETES_CLUSTER_CONFIG")
-      }
-    }
+        stage('K8S Deploy') {
+        steps{   
+            script {
+                withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
+                sh 'kubectl apply -f  deploy.yaml'
+                }
+            }
+        }
+       }
 }
 post {
         always{
