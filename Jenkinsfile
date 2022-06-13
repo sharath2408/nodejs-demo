@@ -12,17 +12,17 @@ pipeline {
 
         stage('Build docker image') {
             steps{  
-                sh 'sudo docker build -t dockernaan2/nodeapp:$BUILD_NUMBER .'
+                sh 'docker build -t dockernaan2/nodeapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
             steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('push image') {
             steps{
-                sh 'sudo docker push dockernaan2/nodeapp:$BUILD_NUMBER'
+                sh 'docker push dockernaan2/nodeapp:$BUILD_NUMBER'
             }
         }
         stage('K8S Deploy') {
