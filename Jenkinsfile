@@ -12,7 +12,7 @@ pipeline {
 
         stage('Build docker image') {
             steps{  
-                sh 'sudo docker build -t -s dockernaan2/nodeapp:$BUILD_NUMBER .'
+                sh 'sudo docker build -t dockernaan2/nodeapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
