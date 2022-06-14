@@ -17,23 +17,17 @@ pipeline {
         }
         stage('login to dockerhub') {
             steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'sudo echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('push image') {
             steps{
-                sh 'docker push dockernaan2/nodeapp:$BUILD_NUMBER'
+                sh 'sudo docker push dockernaan2/nodeapp:$BUILD_NUMBER'
             }
-        }
-        stage('K8S Deploy') {
-        steps{   
-            script {
-                withKubeConfig([credentialsId: 'k8s', serverUrl: '']) {
-                sh 'kubectl apply -f  deploy.yaml'
-                }
-            }
-        }
-       }
+        }   
+       stage("kubernetes deployment"){
+                 sh 'kubectl apply -f deploy.yml'
+    }
 }
 post {
         always{
