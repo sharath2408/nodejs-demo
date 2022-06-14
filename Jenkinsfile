@@ -25,7 +25,7 @@ pipeline {
                 sh 'sudo docker push dockernaan2/nodeapp:$BUILD_NUMBER'
             }
         }   
-       stage("kubernetes deployment"){
+        stage("kubernetes deployment"){
                  sh 'kubectl apply -f deploy.yml'
     }
 }
